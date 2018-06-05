@@ -263,7 +263,7 @@
 
         $(function () {
 
-            update_knob(".dial", 39);
+            update_knob(".dial", 0);
 
         });
     </script>
@@ -278,7 +278,7 @@
             ctx.push(document.getElementById("canvas2").getContext('2d'));
             ctx.push(document.getElementById("canvas3").getContext('2d'));
 
-            console.log(ctx);
+            // console.log(ctx);
 
             $('#query').submit(function (event) {
                 event.preventDefault();
@@ -305,8 +305,9 @@
                         });
 
                         // ctx.clearRect(0, 0, canvas.width, canvas.height);
+
                         ctx.forEach(function (element) {
-                            element.clearRect(0, 0, canvas.width, canvas.height);
+                            element.clearRect(0, 0, element.width, element.height);
 
                             var myChart = new Chart(element, {
                                 type: 'line',
@@ -355,31 +356,6 @@
                     Labels.push(data.entry_id);
                     distanceValues.push(data.field1);
                 });
-
-                // var ctx = document.getElementById("canvas").getContext('2d');
-
-                // var myChart = new Chart(ctx, {
-                //     type: 'line',
-                //     data: {
-                //         labels: Dates,
-                //         datasets: [{
-                //             label: 'Distance',
-                //             data: distanceValues,
-                //             backgroundColor: getRandomColor(),
-                //             borderColor: getRandomColor(),
-                //             borderWidth: 1
-                //         }]
-                //     },
-                //     options: {
-                //         scales: {
-                //             yAxes: [{
-                //                 ticks: {
-                //                     beginAtZero: true
-                //                 }
-                //             }]
-                //         }
-                //     }
-                // });
 
                 ctx.forEach(function (element) {
                     // element.clearRect(0, 0, canvas.width, canvas.height);

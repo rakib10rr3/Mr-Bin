@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Bin;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
@@ -13,18 +14,15 @@ class BinController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         return view('bin.index');
     }
 
     public function apiGetAllData(Request $request)
     {
-//        return $request->all();
-
         $client = new Client();
         if ($request->has('value')) {
-//            return $request;
             $url = 'https://api.thingspeak.com/channels/504575/feeds.json?results=' . $request->get('value');
         } else {
             $url = 'https://api.thingspeak.com/channels/504575/feeds.json?results=10';
@@ -34,18 +32,19 @@ class BinController extends Controller
 
         $datas = json_decode($data, TRUE);
 
-        $last_distance = $datas['feeds'];
+        $last_distances = $datas['feeds'];
 
-        $length = count($last_distance);
-        $now_value = $last_distance[$length - 1]['field1'];
-//        $now_value = 30;
+        foreach($datas['feeds'] as $key => $value)
+        {
+            $datas['feeds'][$key]['created_at'] = Carbon::parse($value['created_at'])->format('d F Y');
+        }
+
+        $length = count($last_distances);
+        $now_value = $last_distances[$length - 1]['field1'];
 
         $now_value_in_percent = ($now_value*100)/255;
 
         $datas['latest_value'] = $now_value_in_percent;
-
-//        var_dump($datas);
-
 
         return json_encode($datas);
     }
