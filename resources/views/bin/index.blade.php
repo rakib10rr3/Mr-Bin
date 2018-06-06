@@ -185,40 +185,41 @@
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 16,
-                center: new google.maps.LatLng(-33.91722, 151.23064),
+                center: new google.maps.LatLng(22.3655093, 91.8136954),
                 mapTypeId: 'roadmap'
             });
 
             var features = [
                 {
-                    position: new google.maps.LatLng(-33.91721, 151.22630),
+                    position: new google.maps.LatLng(22.3655093, 91.8136954),
                     type: 'info',
-                    msg: 'Bin 1'
+                    msg: 'KDA IT Bin'
                 }, {
-                    position: new google.maps.LatLng(-33.91539, 151.22820),
+                    position: new google.maps.LatLng(22.3657156, 91.8138964),
                     type: 'info',
                     msg: 'Bin 2'
                 }, {
-                    position: new google.maps.LatLng(-33.91747, 151.22912),
+                    position: new google.maps.LatLng(22.3650085,91.8147103),
                     type: 'info',
                     msg: 'Bin 3'
                 }, {
-                    position: new google.maps.LatLng(-33.91910, 151.22907),
+                    position: new google.maps.LatLng(22.3651995,91.8135715),
                     type: 'info',
                     msg: 'Bin 4'
-                }, {
-                    position: new google.maps.LatLng(-33.91725, 151.23011),
-                    type: 'info',
-                    msg: 'Bin 5'
-                }, {
-                    position: new google.maps.LatLng(-33.91872, 151.23089),
-                    type: 'info',
-                    msg: 'Bin 6'
-                }, {
-                    position: new google.maps.LatLng(-33.91784, 151.23094),
-                    type: 'info',
-                    msg: 'Bin 7'
                 },
+                // {
+                //     position: new google.maps.LatLng(-33.91725, 151.23011),
+                //     type: 'info',
+                //     msg: 'Bin 5'
+                // }, {
+                //     position: new google.maps.LatLng(-33.91872, 151.23089),
+                //     type: 'info',
+                //     msg: 'Bin 6'
+                // }, {
+                //     position: new google.maps.LatLng(-33.91784, 151.23094),
+                //     type: 'info',
+                //     msg: 'Bin 7'
+                // },
 
             ];
 
