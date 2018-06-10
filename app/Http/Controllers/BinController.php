@@ -36,13 +36,13 @@ class BinController extends Controller
 
         foreach($datas['feeds'] as $key => $value)
         {
-            $datas['feeds'][$key]['created_at'] = Carbon::parse($value['created_at'])->format('d F Y');
+            $datas['feeds'][$key]['created_at'] = Carbon::parse($value['created_at'])->format('d F Y h:i A');
         }
 
         $length = count($last_distances);
         $now_value = $last_distances[$length - 1]['field1'];
 
-        $now_value_in_percent = ($now_value*100)/255;
+        $now_value_in_percent = ((255-$now_value)*100)/255;
 
         $datas['latest_value'] = $now_value_in_percent;
 

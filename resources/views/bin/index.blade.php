@@ -182,9 +182,10 @@
 
     <script>
 
-        function initMap() {
+        function initMap(num) {
+            console.log(num);
             map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 16,
+                zoom: 18,
                 center: new google.maps.LatLng(22.3655093, 91.8136954),
                 mapTypeId: 'roadmap'
             });
@@ -193,19 +194,19 @@
                 {
                     position: new google.maps.LatLng(22.3655093, 91.8136954),
                     type: 'info',
-                    msg: 'KDA IT Bin'
+                    msg: 'BIN no. 1 '+"<br/>"+'Place: KDA IT'+"<br/>"+'Bin Status: ' + String(Math.ceil(num)) + '%'
                 }, {
-                    position: new google.maps.LatLng(22.3657156, 91.8138964),
+                     position: new google.maps.LatLng(22.3657156, 91.8138964),
                     type: 'info',
-                    msg: 'Bin 2'
+                    msg: 'BIN no. 2 '+"<br/>"+'Place: SB TV'+"<br/>"+'Bin Status: ' + String(Math.ceil(num)) + '%'
                 }, {
                     position: new google.maps.LatLng(22.3650085,91.8147103),
                     type: 'info',
-                    msg: 'Bin 3'
+                    msg: 'BIN no. 3 '+"<br/>"+'Place: KDA IT'+"<br/>"+'Bin Status: ' + String(Math.ceil(num)) + '%'
                 }, {
                     position: new google.maps.LatLng(22.3651995,91.8135715),
                     type: 'info',
-                    msg: 'Bin 4'
+                    msg: 'BIN no. 4 '+"<br/>"+'Place: KDA IT'+"<br/>"+'Bin Status: ' + String(Math.ceil(num)) + '%'
                 },
                 // {
                 //     position: new google.maps.LatLng(-33.91725, 151.23011),
@@ -254,17 +255,28 @@
     <script>
         function update_knob(obj, value) {
             $(obj).val(value);
+            var $color = '#2ecc71';
+
+            if(parseFloat(value) > 80)
+            {
+                $color = '#e74c3c';
+            } else if(parseFloat(value) > 40)
+            {
+                $color = '#f1c40f';
+            }
+
             $(obj).knob({
                 'data-displayInput': false,
                 'data-linecap': 'round',
                 'readOnly': true,
+                'fgColor': $color,
             });
             $(obj).trigger('change');
         }
 
         $(function () {
 
-            update_knob(".dial", 0);
+            //update_knob(".dial", 0);
 
         });
     </script>
@@ -290,7 +302,6 @@
 
                 $(document).ready(function () {
                     $.get(url, $data, function (response) {
-
                         var Dates = new Array();
                         var Labels = new Array();
                         var distanceValues = new Array();
@@ -301,8 +312,8 @@
                             // console.log(data);
                             Dates.push(data.created_at);
                             Labels.push(data.entry_id);
-                            distanceValues.push(data.field1);
-
+                            var latestValue = parseFloat(255-data.field1);
+                            distanceValues.push(latestValue.toFixed(2));
                         });
 
                         // ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -336,7 +347,7 @@
 
 
                         update_knob(".dial", json.latest_value);
-
+                        initMap(json.latest_value);
                     });
                 });
 
@@ -355,7 +366,7 @@
                     // console.log(data);
                     Dates.push(data.created_at);
                     Labels.push(data.entry_id);
-                    distanceValues.push(data.field1);
+                    distanceValues.push(255-data.field1);
                 });
 
                 ctx.forEach(function (element) {
@@ -386,6 +397,7 @@
                 });
 
                 update_knob(".dial", json.latest_value);
+                initMap(json.latest_value);
 
             });
         });
