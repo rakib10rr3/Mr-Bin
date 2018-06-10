@@ -10411,9 +10411,23 @@ a.text-dark:focus {
   }
 }
 
-.navbar-laravel {
-  background-color: #fff;
-  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+.jumbotron {
+  padding: .5rem 2rem;
+  margin-bottom: 0;
+}
+
+.heading .display-4 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 0;
+}
+
+.heading h1 {
+  color: #00000000;
+}
+
+#map {
+  height: 300px;
 }
 

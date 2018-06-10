@@ -1,178 +1,186 @@
 @extends('layouts.app')
 
 @section('styles')
-    <style>
-        #map {
-            height: 400px;
-        }
-    </style>
+
 @endsection
 
 @section('content')
 
-    <div class="card mb-4">
-        <div class="card-body">
-            <div id="map"></div>
+    <div class="fixed-top header-parts">
+
+        <div class="jumbotron heading rounded-0 text-center">
+            <h1 class="display-4">Bin Tracker — Track bin automatically</h1>
         </div>
+
+        <div class="card shadow rounded-0">
+            <div class="card-body">
+                <div id="map"></div>
+            </div>
+        </div>
+
     </div>
 
-    <div class="card mb-4">
-        <div class="card-body">
+    <div class="container pt-4 pb-4 bin-list">
 
-            <div class="row">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
 
-                <div class="col-md-4 align-self-center">
-                    <div class="ts-bin-info text-center row">
-                        <div class="col-md-6">
-                            <p><strong>Bin Type</strong></p>
-                            <p>Waste Bin</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p><strong>Bin Number</strong></p>
-                            <p>1</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col text-center">
-                            <input id="liveBin1" type="text" class="dial">
-                        </div>
-                    </div>
-                </div>
+                <div class="row">
 
-                <div class="col-md-8 align-self-center">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <canvas id="canvas1"></canvas>
+                    <div class="col-md-4 align-self-center">
+                        <div class="ts-bin-info text-center row">
+                            <div class="col-md-6">
+                                <p><strong>Bin Type</strong></p>
+                                <p>Waste Bin</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Bin Number</strong></p>
+                                <p>1</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col text-center">
+                                <input id="liveBin1" type="text" class="dial">
+                            </div>
                         </div>
                     </div>
 
-                    <form id="query" action="">
-                        @csrf
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
+                    <div class="col-md-8 align-self-center">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <canvas id="canvas1"></canvas>
+                            </div>
+                        </div>
+
+                        <form id="query" action="">
+                            @csrf
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
                                 <span class="input-group-text"
                                       id="inputGroup-sizing-default">History Custom Query</span>
+                                </div>
+                                <input id="val" name="val" type="number" min="0" class="form-control"
+                                       placeholder="Last Entry"
+                                       aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">Show</button>
+                                </div>
                             </div>
-                            <input id="val" name="val" type="number" min="0" class="form-control"
-                                   placeholder="Last Entry"
-                                   aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">Show</button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
+
                 </div>
 
             </div>
-
         </div>
-    </div>
 
-    <div class="card mb-4">
-        <div class="card-body">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
 
-            <div class="row">
+                <div class="row">
 
-                <div class="col-md-4 align-self-center">
-                    <div class="ts-bin-info text-center row">
-                        <div class="col-md-6">
-                            <p><strong>Bin Type</strong></p>
-                            <p>Waste Bin</p>
+                    <div class="col-md-4 align-self-center">
+                        <div class="ts-bin-info text-center row">
+                            <div class="col-md-6">
+                                <p><strong>Bin Type</strong></p>
+                                <p>Waste Bin</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Bin Number</strong></p>
+                                <p>1</p>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <p><strong>Bin Number</strong></p>
-                            <p>1</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col text-center">
-                            <input id="liveBin1" type="text" class="dial">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-8 align-self-center">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <canvas id="canvas2"></canvas>
+                        <hr>
+                        <div class="row">
+                            <div class="col text-center">
+                                <input id="liveBin1" type="text" class="dial">
+                            </div>
                         </div>
                     </div>
 
-                    <form id="query" action="">
-                        @csrf
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
+                    <div class="col-md-8 align-self-center">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <canvas id="canvas2"></canvas>
+                            </div>
+                        </div>
+
+                        <form id="query" action="">
+                            @csrf
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
                                 <span class="input-group-text"
                                       id="inputGroup-sizing-default">History Custom Query</span>
+                                </div>
+                                <input id="val" name="val" type="number" min="0" class="form-control"
+                                       placeholder="Last Entry"
+                                       aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">Show</button>
+                                </div>
                             </div>
-                            <input id="val" name="val" type="number" min="0" class="form-control"
-                                   placeholder="Last Entry"
-                                   aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">Show</button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
+
                 </div>
 
             </div>
-
         </div>
-    </div>
 
-    <div class="card mb-4">
-        <div class="card-body">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
 
-            <div class="row">
+                <div class="row">
 
-                <div class="col-md-4 align-self-center">
-                    <div class="ts-bin-info text-center row">
-                        <div class="col-md-6">
-                            <p><strong>Bin Type</strong></p>
-                            <p>Waste Bin</p>
+                    <div class="col-md-4 align-self-center">
+                        <div class="ts-bin-info text-center row">
+                            <div class="col-md-6">
+                                <p><strong>Bin Type</strong></p>
+                                <p>Waste Bin</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Bin Number</strong></p>
+                                <p>1</p>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <p><strong>Bin Number</strong></p>
-                            <p>1</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col text-center">
-                            <input id="liveBin1" type="text" class="dial">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-8 align-self-center">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <canvas id="canvas3"></canvas>
+                        <hr>
+                        <div class="row">
+                            <div class="col text-center">
+                                <input id="liveBin1" type="text" class="dial">
+                            </div>
                         </div>
                     </div>
 
-                    <form id="query" action="">
-                        @csrf
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
+                    <div class="col-md-8 align-self-center">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <canvas id="canvas3"></canvas>
+                            </div>
+                        </div>
+
+                        <form id="query" action="">
+                            @csrf
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
                                 <span class="input-group-text"
                                       id="inputGroup-sizing-default">History Custom Query</span>
+                                </div>
+                                <input id="val" name="val" type="number" min="0" class="form-control"
+                                       placeholder="Last Entry"
+                                       aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">Show</button>
+                                </div>
                             </div>
-                            <input id="val" name="val" type="number" min="0" class="form-control"
-                                   placeholder="Last Entry"
-                                   aria-label="Recipient's username" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">Show</button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
+
                 </div>
 
             </div>
-
         </div>
+
     </div>
 
 @endsection
@@ -182,8 +190,20 @@
 
     <script>
 
+        $(function () {
+
+            $headerHeight = $('.header-parts').outerHeight();
+
+            $('.bin-list').css('margin-top', $headerHeight + 'px');
+
+        });
+
+    </script>
+
+    <script>
+
         function initMap(num) {
-            console.log(num);
+            // console.log(num);
             map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 18,
                 center: new google.maps.LatLng(22.3655093, 91.8136954),
@@ -194,33 +214,20 @@
                 {
                     position: new google.maps.LatLng(22.3655093, 91.8136954),
                     type: 'info',
-                    msg: 'BIN no. 1 '+"<br/>"+'Place: KDA IT'+"<br/>"+'Bin Status: ' + String(Math.ceil(num)) + '%'
+                    msg: 'BIN no. 1 ' + "<br/>" + 'Place: KDA IT' + "<br/>" + 'Bin Status: ' + String(Math.ceil(num)) + '%'
                 }, {
-                     position: new google.maps.LatLng(22.3657156, 91.8138964),
+                    position: new google.maps.LatLng(22.3657156, 91.8138964),
                     type: 'info',
-                    msg: 'BIN no. 2 '+"<br/>"+'Place: SB TV'+"<br/>"+'Bin Status: ' + String(Math.ceil(num)) + '%'
+                    msg: 'BIN no. 2 ' + "<br/>" + 'Place: SB TV' + "<br/>" + 'Bin Status: ' + String(Math.ceil(num)) + '%'
                 }, {
-                    position: new google.maps.LatLng(22.3650085,91.8147103),
+                    position: new google.maps.LatLng(22.3650085, 91.8147103),
                     type: 'info',
-                    msg: 'BIN no. 3 '+"<br/>"+'Place: KDA IT'+"<br/>"+'Bin Status: ' + String(Math.ceil(num)) + '%'
+                    msg: 'BIN no. 3 ' + "<br/>" + 'Place: KDA IT' + "<br/>" + 'Bin Status: ' + String(Math.ceil(num)) + '%'
                 }, {
-                    position: new google.maps.LatLng(22.3651995,91.8135715),
+                    position: new google.maps.LatLng(22.3651995, 91.8135715),
                     type: 'info',
-                    msg: 'BIN no. 4 '+"<br/>"+'Place: KDA IT'+"<br/>"+'Bin Status: ' + String(Math.ceil(num)) + '%'
+                    msg: 'BIN no. 4 ' + "<br/>" + 'Place: KDA IT' + "<br/>" + 'Bin Status: ' + String(Math.ceil(num)) + '%'
                 },
-                // {
-                //     position: new google.maps.LatLng(-33.91725, 151.23011),
-                //     type: 'info',
-                //     msg: 'Bin 5'
-                // }, {
-                //     position: new google.maps.LatLng(-33.91872, 151.23089),
-                //     type: 'info',
-                //     msg: 'Bin 6'
-                // }, {
-                //     position: new google.maps.LatLng(-33.91784, 151.23094),
-                //     type: 'info',
-                //     msg: 'Bin 7'
-                // },
 
             ];
 
@@ -257,11 +264,9 @@
             $(obj).val(value);
             var $color = '#2ecc71';
 
-            if(parseFloat(value) > 80)
-            {
+            if (parseFloat(value) > 80) {
                 $color = '#e74c3c';
-            } else if(parseFloat(value) > 40)
-            {
+            } else if (parseFloat(value) > 40) {
                 $color = '#f1c40f';
             }
 
@@ -273,12 +278,6 @@
             });
             $(obj).trigger('change');
         }
-
-        $(function () {
-
-            //update_knob(".dial", 0);
-
-        });
     </script>
 
     <script>
@@ -312,7 +311,7 @@
                             // console.log(data);
                             Dates.push(data.created_at);
                             Labels.push(data.entry_id);
-                            var latestValue = parseFloat(255-data.field1);
+                            var latestValue = parseFloat(255 - data.field1);
                             distanceValues.push(latestValue.toFixed(2));
                         });
 
@@ -345,7 +344,6 @@
                             });
                         });
 
-
                         update_knob(".dial", json.latest_value);
                         initMap(json.latest_value);
                     });
@@ -366,7 +364,7 @@
                     // console.log(data);
                     Dates.push(data.created_at);
                     Labels.push(data.entry_id);
-                    distanceValues.push(255-data.field1);
+                    distanceValues.push(255 - data.field1);
                 });
 
                 ctx.forEach(function (element) {
